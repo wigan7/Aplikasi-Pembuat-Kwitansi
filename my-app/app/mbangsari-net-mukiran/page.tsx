@@ -274,147 +274,109 @@ export default function MbangsariNetMukiranPage() {
         }
 
         .isp-receipt {
-          width: 317px;
-          background: #d8d8d8;
-          border-radius: 0;
-          padding: 14px 11px 10px;
-          box-shadow: 0 24px 55px rgba(2, 6, 23, 0.45);
+          width: 320px;
+          background: #ffffff;
+          border-radius: 12px;
+          padding: 30px 20px 24px;
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
           text-align: center;
-          font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
           color: #1d1d1d;
         }
 
         .isp-logo-wrap {
-          width: fit-content;
-          height: auto;
-          margin: 0 auto 2px;
+          margin: 0 auto 8px;
           display: flex;
-          align-items: center;
           justify-content: center;
         }
 
         .isp-logo-image {
-          width: 58px;
-          height: 58px;
+          width: 60px;
+          height: 60px;
           object-fit: contain;
         }
 
         .isp-brand {
-          font-size: 34px;
-          line-height: 0.92;
+          font-size: 18px;
           font-weight: 800;
           margin: 0;
-          font-family: "Arial Narrow", Arial, sans-serif;
-          transform: scaleX(0.7);
-          transform-origin: center;
-          letter-spacing: 0.1px;
-          color: #131313;
+          color: #000000;
         }
 
         .isp-branch {
-          margin-top: 1px;
-          color: #5d5d5d;
-          font-size: 24px;
-          font-family: "Arial Narrow", Arial, sans-serif;
-          transform: scaleX(0.56);
-          transform-origin: center;
-          margin-bottom: 6px;
+          font-size: 13px;
+          color: #666666;
+          margin: 4px 0 20px;
         }
 
         .isp-title {
-          margin: 0;
-          font-size: 33px;
-          font-weight: 800;
-          font-family: "Arial Narrow", Arial, sans-serif;
-          line-height: 0.92;
-          transform: scaleX(0.72);
-          transform-origin: center;
-          color: #1f1f1f;
+          font-size: 14px;
+          font-weight: 700;
+          margin: 0 0 16px;
+          color: #111111;
         }
 
         .isp-divider {
-          margin: 10px auto 12px;
-          border-top: 2px dashed #b7b7b7;
+          border-top: 1px dashed #cccccc;
+          margin: 0 0 16px;
         }
 
         .isp-detail-list {
           text-align: left;
-          font-size: 32px;
-          line-height: 1.18;
-          font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-          transform: scale(0.41);
-          transform-origin: top left;
-          width: 244%;
-          padding: 0;
-          margin-bottom: -106px;
+          width: 100%;
+          margin-bottom: 20px;
         }
 
         .isp-detail-row {
           display: grid;
-          grid-template-columns: 256px 22px 1fr;
-          gap: 0;
-          margin-bottom: 7px;
-          align-items: baseline;
-          color: #6a6a6a;
+          grid-template-columns: 95px 10px 1fr;
+          margin-bottom: 8px;
+          font-size: 13px;
+          color: #666666;
+          align-items: center;
         }
 
         .isp-detail-row strong {
-          justify-self: end;
           text-align: right;
-          letter-spacing: 0;
-          font-weight: 700;
-          color: #1f1f1f;
+          color: #111111;
+          font-weight: 600;
         }
 
         .isp-gap {
-          height: 16px;
+          height: 12px;
         }
 
         .isp-total-box {
-          margin-top: 9px;
-          border: 1px solid #c9c9c9;
-          border-radius: 10px;
-          background: #e6e6e6;
-          padding: 13px 13px;
-          min-height: 67px;
-          display: grid;
-          grid-template-columns: auto auto;
+          border: 1px solid #e5e5e5;
+          border-radius: 8px;
+          background: #ffffff;
+          padding: 14px 16px;
+          display: flex;
           justify-content: space-between;
           align-items: center;
-          font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-          color: #3f3f3f;
+          margin-bottom: 24px;
         }
 
         .isp-total-box span {
-          font-size: 30px;
-          font-weight: 700;
-          font-family: "Arial Narrow", Arial, sans-serif;
-          transform: scaleX(0.52);
-          transform-origin: left;
-          white-space: nowrap;
-          color: #3f3f3f;
+          font-size: 14px;
+          font-weight: 800;
+          color: #333333;
         }
 
         .isp-total-box strong {
-          color: #1d84e2;
-          font-size: 16px;
-          transform: none;
-          line-height: 0.9;
-          font-weight: 700;
-          white-space: nowrap;
+          font-size: 18px;
+          font-weight: 800;
+          color: #007bff;
         }
 
         .isp-footnote {
-          margin-top: 9px;
           font-size: 12px;
-          font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-          transform: none;
           color: #444444;
-          margin-bottom: 0;
+          margin: 4px 0;
         }
 
         .isp-footnote + .isp-footnote {
-          margin-top: 1px;
+          margin-top: 4px;
         }
 
         @media (max-width: 980px) {
@@ -453,6 +415,8 @@ export default function MbangsariNetMukiranPage() {
             margin: 0 auto;
             width: 80mm;
             min-height: 120mm;
+            border-radius: 0;
+            padding: 10px;
           }
         }
       `}</style>
