@@ -13,6 +13,14 @@ export default function MbangsariNetMukiranPage() {
   const [periode, setPeriode] = useState("Tagihan Bln 4 - Thn 2026");
   const [metode, setMetode] = useState("BCA");
   const [totalBayar, setTotalBayar] = useState<number | "">(175000);
+  const [paperWidthCm, setPaperWidthCm] = useState(10);
+  const [paperHeightCm, setPaperHeightCm] = useState(15);
+
+  const paperWidthMm = paperWidthCm * 10;
+  const paperHeightMm = paperHeightCm * 10;
+  const printableWidthMm = Math.max(paperWidthMm - 3, 0);
+  const printableHeightMm = Math.max(paperHeightMm - 3, 0);
+  const contentScale = Math.min(paperWidthCm / 10, paperHeightCm / 15, 1);
 
   const totalBayarFormatted = useMemo(() => {
     if (totalBayar === "") return "Rp 0";
@@ -92,6 +100,43 @@ export default function MbangsariNetMukiranPage() {
           </div>
         </div>
 
+        <div className="isp-row-2">
+          <div className="isp-field">
+            <label>Lebar Kertas (cm)</label>
+            <input
+              type="number"
+              min="6"
+              max="12"
+              step="0.1"
+              value={paperWidthCm}
+              onChange={(e) => setPaperWidthCm(e.target.value === "" ? 10 : Number(e.target.value))}
+            />
+          </div>
+          <div className="isp-field">
+            <label>Tinggi Kertas (cm)</label>
+            <input
+              type="number"
+              min="8"
+              max="30"
+              step="0.1"
+              value={paperHeightCm}
+              onChange={(e) => setPaperHeightCm(e.target.value === "" ? 15 : Number(e.target.value))}
+            />
+          </div>
+        </div>
+
+        <div className="isp-paper-presets">
+          <button type="button" onClick={() => { setPaperWidthCm(9); setPaperHeightCm(14); }}>
+            9 x 14
+          </button>
+          <button type="button" onClick={() => { setPaperWidthCm(10); setPaperHeightCm(15); }}>
+            10 x 15
+          </button>
+          <button type="button" onClick={() => { setPaperWidthCm(8); setPaperHeightCm(12); }}>
+            8 x 12
+          </button>
+        </div>
+
         <button type="button" className="isp-print-btn" onClick={handlePrint}>
           Cetak Kwitansi
         </button>
@@ -102,7 +147,15 @@ export default function MbangsariNetMukiranPage() {
           Preview kwitansi akan mengikuti contoh struk pembayaran Mbangsari Net Cabang Mukiran.
         </div>
 
-        <section className="isp-receipt" aria-label="Kwitansi ISP Mbangsari Net Cabang Mukiran">
+        <section
+          className="isp-receipt"
+          aria-label="Kwitansi ISP Mbangsari Net Cabang Mukiran"
+          style={{
+            ["--paper-width" as never]: `${paperWidthCm}cm`,
+            ["--paper-height" as never]: `${paperHeightCm}cm`,
+            ["--paper-scale" as never]: contentScale,
+          }}
+        >
           <div className="isp-logo-wrap">
             <Image
               src="/logogingsulnet.png"
@@ -240,6 +293,29 @@ export default function MbangsariNetMukiranPage() {
           gap: 0.7rem;
         }
 
+        .isp-paper-presets {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 0.5rem;
+          margin-bottom: 0.9rem;
+        }
+
+        .isp-paper-presets button {
+          border: 1px solid #cbd5e1;
+          background: #ffffff;
+          color: #0f172a;
+          border-radius: 0.55rem;
+          padding: 0.55rem 0.35rem;
+          font-size: 0.8rem;
+          font-weight: 700;
+          cursor: pointer;
+        }
+
+        .isp-paper-presets button:hover {
+          border-color: #2563eb;
+          color: #2563eb;
+        }
+
         .isp-print-btn {
           width: 100%;
           border: none;
@@ -274,14 +350,19 @@ export default function MbangsariNetMukiranPage() {
         }
 
         .isp-receipt {
-          width: 10cm;
+          width: var(--paper-width, 10cm);
+          height: var(--paper-height, 15cm);
           background: #ffffff;
           border-radius: 12px;
-          padding: 30px 20px 24px;
+          padding: 10px;
           box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
           text-align: center;
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
           color: #1d1d1d;
+          box-sizing: border-box;
+          transform: scale(var(--paper-scale, 1));
+          transform-origin: top center;
+          overflow: hidden;
         }
 
         .isp-logo-wrap {
@@ -396,7 +477,7 @@ export default function MbangsariNetMukiranPage() {
 
         @media print {
           @page {
-            size: 10cm 15cm;
+            size: ${paperWidthCm}cm ${paperHeightCm}cm;
             margin: 1.5mm;
           }
 
@@ -418,13 +499,14 @@ export default function MbangsariNetMukiranPage() {
           .isp-receipt {
             box-shadow: none;
             margin: 0 auto;
-            width: calc(10cm - 3mm);
-            height: calc(15cm - 3mm);
+            width: calc(var(--paper-width, 10cm) - 3mm);
+            height: calc(var(--paper-height, 15cm) - 3mm);
             box-sizing: border-box;
             border-radius: 0;
-            padding: 10px;
+            padding: 8px;
             break-inside: avoid;
             page-break-inside: avoid;
+            transform: scale(var(--paper-scale, 1));
           }
         }
       `}</style>
@@ -432,23 +514,24 @@ export default function MbangsariNetMukiranPage() {
       <style jsx global>{`
         @media print {
           @page {
-            size: 10cm 15cm;
+            size: ${paperWidthCm}cm ${paperHeightCm}cm;
             margin: 1.5mm;
           }
 
           html,
           body {
-            width: 10cm !important;
+            width: var(--paper-width, 10cm) !important;
             margin: 0 !important;
             padding: 0 !important;
           }
 
           .isp-receipt {
-            width: calc(10cm - 3mm) !important;
-            height: calc(15cm - 3mm) !important;
+            width: calc(var(--paper-width, 10cm) - 3mm) !important;
+            height: calc(var(--paper-height, 15cm) - 3mm) !important;
             box-sizing: border-box !important;
             break-inside: avoid !important;
             page-break-inside: avoid !important;
+            transform: scale(var(--paper-scale, 1)) !important;
           }
         }
       `}</style>
