@@ -274,7 +274,7 @@ export default function MbangsariNetMukiranPage() {
         }
 
         .isp-receipt {
-          width: 320px;
+          width: 10cm;
           background: #ffffff;
           border-radius: 12px;
           padding: 30px 20px 24px;
@@ -395,6 +395,11 @@ export default function MbangsariNetMukiranPage() {
         }
 
         @media print {
+          @page {
+            size: 10cm 15cm;
+            margin: 1.5mm;
+          }
+
           .no-print {
             display: none !important;
           }
@@ -413,10 +418,37 @@ export default function MbangsariNetMukiranPage() {
           .isp-receipt {
             box-shadow: none;
             margin: 0 auto;
-            width: 80mm;
-            min-height: 120mm;
+            width: calc(10cm - 3mm);
+            height: calc(15cm - 3mm);
+            box-sizing: border-box;
             border-radius: 0;
             padding: 10px;
+            break-inside: avoid;
+            page-break-inside: avoid;
+          }
+        }
+      `}</style>
+
+      <style jsx global>{`
+        @media print {
+          @page {
+            size: 10cm 15cm;
+            margin: 1.5mm;
+          }
+
+          html,
+          body {
+            width: 10cm !important;
+            margin: 0 !important;
+            padding: 0 !important;
+          }
+
+          .isp-receipt {
+            width: calc(10cm - 3mm) !important;
+            height: calc(15cm - 3mm) !important;
+            box-sizing: border-box !important;
+            break-inside: avoid !important;
+            page-break-inside: avoid !important;
           }
         }
       `}</style>
